@@ -1,7 +1,7 @@
 import numpy as np
 
 # Constants
-LegLength = 15                      
+LegLength = 15
 MaxLegForce = 0.05
 ForwardAngleLimit = np.pi/6.0
 BackwardAngleLimit = -np.pi/6.0
@@ -16,7 +16,7 @@ class LeggedAgent:
         self.cy = 0.0                                               # Y-position of the agent
         self.vx = 0.0                                               # Velocity of the agent
         self.footstate = 0                                          # State of the foot
-        self.angle = ForwardAngleLimit                              # Leg angle
+        self.angle = 0.0                                            # Leg angle
         self.omega = 0.0                                            # Leg angular velocity
         self.forwardForce = 0.0                                     # Forward force applied to leg
         self.backwardForce = 0.0                                    # Backward force applied to leg
@@ -85,5 +85,5 @@ class LeggedAgent:
             self.footY = self.jointY + LegLength * np.cos(self.angle)
 
         # If the foot is too far back, the body becomes "unstable" and forward motion ceases
-        if (self.cx - self.footX > 20):
+        if (abs(self.cx - self.footX) > 20):
             self.vx = 0.0
